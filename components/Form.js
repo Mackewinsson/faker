@@ -35,10 +35,45 @@ const FormComponent = ({ form, setForm, setStart }) => {
     setDestino(e.target.value);
   };
 
+  function newDate() {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    if (month < 10) {
+      return `${addZero(day)}-0${month}-${year}`;
+    } else {
+      return `${addZero(day)}-${month}-${year}`;
+    }
+  }
+
+  // ads zero to a data passed
+  function addZero(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+  //this gets the actual time
+  function getTime(i) {
+    const d = new Date();
+    const h = addZero(d.getHours());
+    const m = addZero(d.getMinutes());
+    const s = addZero(d.getSeconds());
+    const time = h + ":" + m + ":" + s;
+    if (i) {
+      const hasta = h + i + ":" + m + ":" + s;
+      return hasta;
+    }
+    return time;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setStart(true);
+    const hora = `${newDate()} ${getTime()}`;
+    const hasta = `${newDate()} ${getTime(2)}`;
     setForm((prevForm) => ({
       ...prevForm,
       nombre,
@@ -47,6 +82,8 @@ const FormComponent = ({ form, setForm, setStart }) => {
       domicilio,
       origen,
       destino,
+      hora,
+      hasta,
     }));
   };
 

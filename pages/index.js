@@ -140,6 +140,8 @@ export default function Home() {
     domicilio: "",
     origen: "",
     destino: "",
+    hora: "",
+    hasta: "",
   });
   const [image, setimage] = useState("");
   const handleCapture = async () => {
@@ -151,39 +153,52 @@ export default function Home() {
   return (
     <Container>
       {start ? (
-        <Row>
-          <Col className="text-center mt-5 mb-5">
-            <Button
-              download="myImage.jpg"
-              href={image}
-              onClick={handleCapture}
-              ref={buttonRef}
-              variant={image === "" ? "primary" : "success"}
-            >
-              {image === "" ? "Procesar 😈" : "Bajar ✅"}
-            </Button>
-          </Col>
-          <Col>
-            <Wrapper>
-              <div ref={permisoRef}>
-                <Nombre>{form.nombre}</Nombre>
-                <Rut>{form.rut}</Rut>
-                <Edad>{form.edad}</Edad>
-                <Domicilio>{form.domicilio}</Domicilio>
-                <Origen>{form.origen}</Origen>
-                <Destino>{form.destino}</Destino>
-                <Hora>03-04-2021 12:03:54</Hora>
-                <Hasta>03-04-2021 02:03:54</Hasta>
-                <Hora2>03-04-2021 12:03:54</Hora2>
-                <img
-                  src="/img/permiso.png"
-                  alt="permiso"
-                  // style={{ maxWidth: "40%", maxHeight: "40%" }}
-                />
-              </div>
-            </Wrapper>
-          </Col>
-        </Row>
+        <>
+          <Row>
+            <Col className="text-center mt-5">
+              <Button
+                download={`permiso${form.hora}.jpg`}
+                href={image}
+                onClick={handleCapture}
+                ref={buttonRef}
+                variant={image === "" ? "primary" : "success"}
+              >
+                {image === "" ? "Procesar 😈" : "Bajar ⬇️"}
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="text-center mt-1 mb-5">
+              {image === "" ? (
+                <small>Preciona para procesar tu permiso</small>
+              ) : (
+                <small>Tu permiso esta listo. Solo debes bajarlo</small>
+              )}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Wrapper>
+                <div ref={permisoRef}>
+                  <Nombre>{form.nombre}</Nombre>
+                  <Rut>{form.rut}</Rut>
+                  <Edad>{form.edad}</Edad>
+                  <Domicilio>{form.domicilio}</Domicilio>
+                  <Origen>{form.origen}</Origen>
+                  <Destino>{form.destino}</Destino>
+                  <Hora>{form.hora}</Hora>
+                  <Hasta>{form.hasta}</Hasta>
+                  <Hora2>{form.hora}</Hora2>
+                  <img
+                    src="/img/permiso.png"
+                    alt="permiso"
+                    // style={{ maxWidth: "40%", maxHeight: "40%" }}
+                  />
+                </div>
+              </Wrapper>
+            </Col>
+          </Row>
+        </>
       ) : (
         <Row>
           <Col>
