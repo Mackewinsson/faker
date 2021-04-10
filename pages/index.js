@@ -133,6 +133,20 @@ const Hasta = styled.div`
 export default function Home() {
   const permisoRef = useRef(null);
   const [start, setStart] = useState(false);
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    setUsers((state) => [
+      ...state,
+      {
+        nombre: "Mackewinsson Palencia",
+        rut: "24.741.617-K",
+        edad: "32",
+        domicilio: "San isidro 154",
+        origen: "San isidro 154",
+        destino: "Lider",
+      },
+    ]);
+  }, []);
   const [form, setForm] = useState({
     nombre: "",
     rut: "",
@@ -202,7 +216,12 @@ export default function Home() {
       ) : (
         <Row>
           <Col>
-            <Form setForm={setForm} form={form} setStart={setStart} />
+            <Form
+              setForm={setForm}
+              form={form}
+              setStart={setStart}
+              users={users}
+            />
           </Col>
         </Row>
       )}

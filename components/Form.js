@@ -8,7 +8,7 @@ const StyledForm = styled(Form)`
   margin-top: 20px;
 `;
 
-const FormComponent = ({ form, setForm, setStart }) => {
+const FormComponent = ({ form, setForm, setStart, users }) => {
   const [nombre, setnombre] = useState("");
   const [rut, setRut] = useState("");
   const [edad, setEdad] = useState("");
@@ -57,7 +57,7 @@ const FormComponent = ({ form, setForm, setStart }) => {
   //this gets the actual time
   function getTime(i) {
     const d = new Date();
-    const h = addZero(d.getHours());
+    const h = d.getHours();
     const m = addZero(d.getMinutes());
     const s = addZero(d.getSeconds());
     const time = h + ":" + m + ":" + s;
@@ -69,22 +69,44 @@ const FormComponent = ({ form, setForm, setStart }) => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setStart(true);
+    if (form.name === "") {
+      e.preventDefault();
+      e.stopPropagation();
+      setStart(true);
+      const hora = `${newDate()} ${getTime()}`;
+      const hasta = `${newDate()} ${getTime(2)}`;
+      setForm((prevForm) => ({
+        ...prevForm,
+        nombre,
+        rut,
+        edad,
+        domicilio,
+        origen,
+        destino,
+        hora,
+        hasta,
+      }));
+    } else {
+      setStart(true);
+    }
+  };
+
+  const handleDropdown = (e) => {
     const hora = `${newDate()} ${getTime()}`;
     const hasta = `${newDate()} ${getTime(2)}`;
-    setForm((prevForm) => ({
-      ...prevForm,
-      nombre,
-      rut,
-      edad,
-      domicilio,
-      origen,
-      destino,
-      hora,
-      hasta,
-    }));
+    if (e.target.value === "Mackewinsson") {
+      setForm((prevForm) => ({
+        ...prevForm,
+        nombre: users[0].nombre,
+        rut: users[0].rut,
+        edad: users[0].edad,
+        domicilio: users[0].domicilio,
+        origen: users[0].origen,
+        destino: users[0].domicilio,
+        hora: hora,
+        hasta: hasta,
+      }));
+    }
   };
 
   return (
@@ -93,6 +115,18 @@ const FormComponent = ({ form, setForm, setStart }) => {
         handleSubmit(e);
       }}
     >
+      <Form.Group controlId="formGridState">
+        <Form.Label>User</Form.Label>
+        <Form.Control
+          as="select"
+          defaultValue="Elegir"
+          onChange={(e) => handleDropdown(e)}
+        >
+          <option></option>
+          <option>Mackewinsson</option>
+          <option>Mackewinsson22</option>
+        </Form.Control>
+      </Form.Group>
       <Form.Group>
         <Form.Label>Nombre</Form.Label>
         <Form.Control
