@@ -138,12 +138,18 @@ export default function Home() {
     setUsers((state) => [
       ...state,
       {
-        nombre: "Mackewinsson Palencia",
-        rut: "24.741.617-K",
-        edad: "32",
+        nombre: "Miton Cordero",
+        rut: "25.984.913-6",
+        edad: "53",
         domicilio: "San isidro 154",
         origen: "San isidro 154",
-        destino: "Lider",
+        destino: "Sodimac",
+        // nombre: "Luz Marina Bastidas",
+        // rut: "25.984.926-6",
+        // edad: "50",
+        // domicilio: "San isidro 154",
+        // origen: "San isidro 154",
+        // destino: "Sodimac",
       },
     ]);
   }, []);

@@ -102,7 +102,7 @@ const FormComponent = ({ form, setForm, setStart, users }) => {
         edad: users[0].edad,
         domicilio: users[0].domicilio,
         origen: users[0].origen,
-        destino: users[0].domicilio,
+        destino: users[0].destino,
         hora: hora,
         hasta: hasta,
       }));
